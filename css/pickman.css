@@ -1,0 +1,103 @@
+body {
+    color: #272727;
+}
+
+.container {
+    width: 620px;
+    margin: 0px auto;
+}
+
+h1 {
+    padding: 40px;
+    font-size: 5em;
+}
+
+/* Character & Item Styles */
+
+.char {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#pickman {
+    background-size: 80%;
+}
+
+.close-mouth {
+    background-image: url('../assets/pickman-closed.svg');
+}
+
+.open-mouth {
+    background-image: url('../assets/pickman-open.svg');
+}
+
+.ghost {
+    
+}
+
+.ghost-red {
+    background-image: url('../assets/ghost-red.svg');
+}
+
+.ghost-green {
+    background-image: url('../assets/ghost-green.svg');
+}
+
+.ghost-blue {
+    background-image: url('../assets/ghost-blue.svg');
+}
+
+.ghost-pink {
+    background-image: url('../assets/ghost-pink.svg');
+}
+
+/* Game Board Styles */
+
+.box-row {
+    display: flex;
+    width: 600px;
+    height: 40px;
+}
+
+.box {
+    height: 40px;
+    width: 40px;
+}
+
+#pickman-board { 
+    border: 10px solid #12bddb;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.path { background-color: #bae2e9; }
+
+.wall { background-color: #12bddb; }
+
+.ghost-cave { background-color: #666666; }
+
+.treat {
+    background-image: url('../assets/fruit.svg');
+    background-size: contain;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gate-left {
+    border-left: 10px solid white;
+    margin-left: -10px;
+    background-image: url('../assets/arrow-left-short.svg');
+    background-size: contain;
+}
+
+.gate-right {
+    border-right: 10px solid white;
+    margin-right: -10px;
+    background-image: url('../assets/arrow-right-short.svg');
+    background-size: contain;
+}

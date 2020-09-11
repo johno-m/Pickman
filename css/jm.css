@@ -1,0 +1,50 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    font-family: Helvetica, sans-serif;
+}
+
+li, ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
+
+button:focus {outline: white 1px;}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.spread {
+    justify-content: space-between;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.sr-only {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.cell {
+    flex: 1;
+}
