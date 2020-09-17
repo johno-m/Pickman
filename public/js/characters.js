@@ -6,6 +6,8 @@ class Ghost {
         this.isFlashing = false;
         this.id = id;
         this.num = i;
+        this.savedPosition = startLoc; 
+        this.flashInterval;
     }
 
     /** Returns the opposite direction the Ghost is currently travelling in */
@@ -30,14 +32,25 @@ class Ghost {
         }
     }
 
-    flash(){
-        if(this.isFlashing) {
-            setInterval(this.flash(), 500);
+    flash(count){
+        let ghost = document.getElementById(this.id);
+        let A = 'url("./assets/ghost-grey.svg")';
+        let B = 'url("./assets/ghost-white.svg")';
+        if(count < 5){
+            A = 'url("./assets/'+this.icon+'")';
+        }
+        
+        if(ghost.style.backgroundImage == B){
+            ghost.style.backgroundImage = A;
+        } else {
+            ghost.style.backgroundImage = B;
         }
     }
-    endFlash(){
-        this.isFlashing = false;
+
+    resetFlash(){
+        document.getElementById(this.id).style.backgroundImage = 'url("./assets/'+this.icon+'")';
     }
+
 }
 
 class PickMan {
@@ -47,11 +60,12 @@ class PickMan {
         this.startingLocation = {x: 7, y: 14};
         this.mouthAnimation();
         this.mouthOpen = false;
+        this.savedPosition = {x: 7, y: 14}; 
     }
     
     flash(){
         if(this.isFlashing) {
-            setInterval(this.flash(), 500);
+            this.flashInterval = setInterval(this.flash(), 500);
         }
     }
     endFlash(){

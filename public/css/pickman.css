@@ -1,22 +1,37 @@
 body {
     color: #272727;
+    overflow: hidden;
 }
 
-.container {
-    width: 620px;
-    margin: 0px auto;
+@media screen and (min-width: 620px) {
+    .container {
+        width: 620px;
+        margin: 0px auto;
+    }
 }
+@media screen and (max-width: 620px) {
+    .container {
+        width: 470px;
+        margin: 0px auto;
+    }
+}
+
+
+
 
 h1 {
-    padding: 40px;
+    padding: 40px 20px 0px 20px;
     font-size: 5em;
+}
+h2 {
+    padding: 10px 30px;
 }
 
 /* Character & Item Styles */
 
 .char {
-    width: 40px;
-    height: 40px;
+    width: calc(100% / 15);
+    height: calc(100% / 15);
     position: absolute;
     background-size: contain;
     background-position: center;
@@ -59,22 +74,81 @@ h1 {
 
 .box-row {
     display: flex;
-    width: 600px;
-    height: 40px;
+    flex: 1;
+    flex-direction: row;
 }
 
 .box {
-    height: 40px;
-    width: 40px;
+    height: 100%;
+    flex: 1;
+}
+
+button {
+    padding: 15px;
+    background-color: #12bddb;
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    width: 35%;
+    
 }
 
 #pickman-board { 
+    height: 100%;
     border: 10px solid #12bddb;
     box-sizing: border-box;
     position: relative;
+    display: none;
+    flex-direction: column;
+}
+
+#pickman-welcome {
+    display: flex;
+}
+
+.pause-screen {
+    height: 100%;
+    border: 10px solid #12bddb;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pause-screen h2 {
+    padding: 40px;
+}
+
+.pause-screen p {
+    padding: 0px 20px;
+    font-size: 1.6em;
+}
+
+#pickman-endscreen {
+    display: none;
+}
+
+#pickman-outer-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+}
+
+#pickman-inner-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
 }
 
 .path { background-color: #bae2e9; }
+
+.dot { 
+    background-image: url('../assets/dot.svg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
 .wall { background-color: #12bddb; }
 
