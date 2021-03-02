@@ -1,22 +1,15 @@
 body {
     color: #272727;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-@media screen and (min-width: 620px) {
-    .container {
-        width: 620px;
-        margin: 0px auto;
-    }
+.container {
+    overflow: hidden;
+    max-width: 620px;
+    width: 100%;
 }
-@media screen and (max-width: 620px) {
-    .container {
-        width: 470px;
-        margin: 0px auto;
-    }
-}
-
-
 
 
 h1 {
@@ -83,14 +76,19 @@ h2 {
     flex: 1;
 }
 
-button {
-    padding: 15px;
-    background-color: #12bddb;
-    color: white;
-    font-size: 1.8em;
+.pause-screen button {
+    padding: 15px 30px;
+    background-color: white;
+    color: #12bddb;
+    border-radius: 0.5em;
+    font-size: 2em;
     font-weight: bold;
-    width: 35%;
-    
+    transition: 1s;
+}
+
+.pause-screen button:hover {
+    background-color: #0ca2bd;
+    color: white;
 }
 
 #pickman-board { 
@@ -109,6 +107,7 @@ button {
 .pause-screen {
     height: 100%;
     border: 10px solid #12bddb;
+    background-color: #12bddb;
     box-sizing: border-box;
     flex-direction: column;
     align-items: center;
@@ -174,4 +173,11 @@ button {
     margin-right: -10px;
     background-image: url('../assets/arrow-right-short.svg');
     background-size: contain;
+}
+
+
+@media screen and (max-width: 500px){
+    h1 {
+        font-size: 4rem;
+    }
 }

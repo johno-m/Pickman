@@ -52,8 +52,6 @@ let gameTickIntervalNPC
 let collisionInterval
 let flashInterval
 
-
-
 let gameState = {
     treatRush: false,
     score: 0,
@@ -344,7 +342,6 @@ function collisionDetection(){
         gameState.score += 10
     }
     
-
     Array.prototype.forEach.call(ghostDivs, function(el) {
         // Get box XY
         let ghostLoc = currentCoords(el)
@@ -352,15 +349,30 @@ function collisionDetection(){
             collisionHasHappened(el, 'ghost')
         }
     })
+    
     Array.prototype.forEach.call(treats, function(el) {
         // Use treat div id to get XY coords. Split by the _ to get [ box, x, y ]
-        
-            
         let treatLoc = el.id.split('_')
         if(pickmanLoc.x == treatLoc[1] && pickmanLoc.y == treatLoc[2]){
             collisionHasHappened(el, 'treat')
         }
     })
+    
+    // check if PickMan is on side gate
+    if(pickmanLoc.x == 0 && pickmanLoc.y == 6 && pickman.currentDirection == "left"){
+        //Pickman is on left gate
+        const newLoc = returnLocOnBoard(14, 6)
+        console.log((newLoc.y)+'px')
+        console.log((newLoc.x)+'px')
+        pickmanDiv.style.top = newLoc.y
+        pickmanDiv.style.left = newLoc.x
+    }
+    if(pickmanLoc.x == 14 && pickmanLoc.y == 6 && pickman.currentDirection == "right"){
+        //Pickman is on right gate
+        const newLoc = returnLocOnBoard(0, 6)
+        pickmanDiv.style.top = newLoc.y
+        pickmanDiv.style.left = newLoc.x
+    }
 
     document.getElementById("scoreH2").innerHTML = "Score: "+gameState.score
 
@@ -438,16 +450,13 @@ function canGo(coords){
         }
     }
     if(belowDiv){
-        if(belowDiv.classList.contains('path')) {
+        if(belowDiv.classList.contains('path') && !belowDiv.classList.contains('ghost-cave')) {
             results.down = true
             results.array.push('down')
         }
-        if(belowDiv.classList.contains('ghost-cave')) {
-            results.down = 'cave'
-        }
     }
     if(rightDiv){
-        if(rightDiv.classList.contains('path')) {
+        if(rightDiv.classList.contains('path') || rightDiv.classList.contains('gate-right')) {
             results.right = true
             results.array.push('right')
         }
@@ -456,7 +465,7 @@ function canGo(coords){
         }
     }
     if(leftDiv){
-        if(leftDiv.classList.contains('path')) {
+        if(leftDiv.classList.contains('path') || leftDiv.classList.contains('gate-left')) {
             results.left = true
             results.array.push('left')
         }
