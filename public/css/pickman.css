@@ -5,10 +5,10 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
 .container {
     overflow: hidden;
-    max-width: 620px;
-    width: 100%;
+    width: 620px;
 }
 
 
@@ -176,8 +176,13 @@ h2 {
 }
 
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 650px){
     h1 {
         font-size: 4rem;
     }
+    .container { 
+        width: var(--cw);
+    }
 }
+
+

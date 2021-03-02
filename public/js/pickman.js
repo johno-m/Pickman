@@ -10,6 +10,25 @@ const startScreen = document.getElementById('pickman-welcome')
 const endScreen = document.getElementById('pickman-endscreen')
 
 const layout = [
+    [4, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7, 7, 7, 7, 4],
+    [7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7],
+    [7, 7, 7, 7, 7, 1, 7, 4, 7, 1, 7, 7, 7, 7, 7],
+    [7, 1, 7, 1, 1, 1, 7, 1, 7, 1, 1, 1, 7, 1, 7],
+    [7, 7, 7, 1, 7, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7],
+    [1, 1, 7, 1, 7, 1, 1, 7, 1, 1, 7, 1, 7, 1, 1],
+    [5, 7, 7, 7, 7, 1, 3, 3, 3, 1, 7, 7, 7, 7, 6],
+    [1, 1, 7, 1, 7, 1, 1, 1, 1, 1, 7, 1, 7, 1, 1],
+    [7, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7, 7, 7, 7, 7],
+    [7, 1, 1, 7, 1, 1, 7, 1, 7, 1, 1, 7, 1, 1, 7],
+    [7, 7, 1, 7, 7, 7, 7, 4, 7, 7, 7, 7, 1, 7, 7],
+    [1, 7, 1, 7, 1, 7, 1, 1, 1, 7, 1, 7, 1, 7, 1],
+    [7, 7, 7, 7, 1, 7, 7, 1, 7, 7, 1, 7, 7, 7, 7],
+    [7, 1, 1, 1, 1, 1, 7, 1, 7, 1, 1, 1, 1, 1, 7],
+    [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4]
+]
+
+// test layout for end game
+const layout2 = [
     [4, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 4],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
     [2, 2, 2, 2, 2, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2],
@@ -24,7 +43,7 @@ const layout = [
     [1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1],
     [2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2],
     [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2],
-    [4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4]
+    [4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 2, 2, 4]
 ]
 
 //** PickMan object */
@@ -61,6 +80,7 @@ let gameState = {
 
 function startGame(){
     // Switch the visible screen
+    
     map.style.display = 'flex'
     endScreen.style.display = 'none'
     startScreen.style.display = 'none'
@@ -78,10 +98,11 @@ function startGame(){
     map.innerHTML = ""
     buildBoard()
     drawCharacters()
-    gameTickIntervalPlayer = setInterval(gameTickPlayer, 17)
+    gameTickIntervalPlayer = setInterval(gameTickPlayer, 12)
     gameTickIntervalNPC = setInterval(gameTickNPC, 20)
     collisionInterval = setInterval(collisionDetection, 100)
     // Swipe Event for mobile devices
+
 }
 
 //** Event listener to adjust gameboard size depending on window size */
@@ -104,6 +125,12 @@ function endGame(reason){
     map.style.display = 'none'
     endScreen.style.display = 'flex'
     startScreen.style.display = 'none'
+    if(reason == "win") {
+        document.getElementById('endGameTitle').innerHTML = `YOU WIN!!` 
+        console.log(document.getElementById('scoreH2').innerText)
+    } else { 
+        document.getElementById('endGameTitle').innerHTML = `Too bad... maybe try again?`
+    }
 }
 
 function gameTickPlayer(){
@@ -160,7 +187,6 @@ function movePickman(nextDirection){
     } else {
         // if the PickMan is NOT at a junction then it can only reverse its direction
         if(nextDirection == pickman.oppositeDirection){
-            console.log("test")
             pickman.currentDirection = nextDirection
         }
     }
@@ -334,7 +360,8 @@ function collisionDetection(){
     let pickmanLoc = currentCoords(pickmanDiv)
     /** the square the PickMan is currently on */
     let currentSquare = document.getElementById("box_"+pickmanLoc.x+"_"+pickmanLoc.y)
-    if(numOfDots < 1){
+    console.log(`numOfDots = ${numOfDots.length}`)
+    if(numOfDots.length < 1){
         endGame('win')
     }
     if(currentSquare.classList.contains('dot')){
@@ -562,7 +589,7 @@ function buildBoard(){
             if(layout[i][j] === 1){
                 box.classList.add('wall')
             } else if(layout[i][j] === 2){
-                box.classList.add('path', 'dot')
+                box.classList.add('path')
             } else if(layout[i][j] === 3){
                 box.classList.add('ghost-cave', 'path')
             } else if(layout[i][j] === 4){
@@ -571,6 +598,8 @@ function buildBoard(){
                 box.classList.add('gate-left')
             } else if(layout[i][j] === 6){
                 box.classList.add('gate-right')
+            } else if(layout[i][j] === 7){
+                box.classList.add('path', 'dot')
             } else {
                 throwError('Error with layout number provided to buildBoard. Number provided: '+layout[i][j])
             }
@@ -587,3 +616,10 @@ function throwError(err){
     console.log(err)
 }
 
+window.addEventListener('resize', adjustWidth)
+window.addEventListener('load', adjustWidth)
+
+function adjustWidth(){
+    const width = (Math.floor(window.innerWidth / 15) * 15) + 20
+    document.documentElement.style.setProperty('--cw', `${width}px`);
+}

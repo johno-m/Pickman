@@ -9,7 +9,6 @@
 (function (window, document) {
 
     'use strict';
-
     // patch CustomEvent to allow constructor creation (IE/Chrome)
     if (typeof window.CustomEvent !== 'function') {
 
